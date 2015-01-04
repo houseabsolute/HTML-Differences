@@ -118,3 +118,13 @@ whitespace-only text
 -------------------------
 <p>
 </p>
+=========================
+Missing end tag
+-------------------------
+<p>This is <strong>strong</p>
+-------------------------
+<p>
+This is
+<strong>
+strong
+</p>
