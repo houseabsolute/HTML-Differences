@@ -94,12 +94,11 @@ sub start_tag {
     if ( $attr && %{$attr} ) {
         my @attrs;
         for my $key ( sort keys %{$attr} ) {
-            my $quote = $attr->{$key} =~ /"/ ? q{'} : q{"};
             push @attrs,
                   $key . '='
-                . $quote
+                . q{"}
                 . encode_entities( $attr->{$key} )
-                . $quote;
+                . q{"};
         }
         $text .= q{ } . join q{ }, @attrs;
     }
