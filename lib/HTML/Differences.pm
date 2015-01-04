@@ -7,7 +7,7 @@ use Exporter qw( import );
 use HTML::TokeParser;
 use Text::Diff qw( diff );
 
-our @EXPORT_OK = qw( html_text_diff html_diff );
+our @EXPORT_OK = qw( html_text_diff diffable_html );
 
 sub html_text_diff {
     my $html1 = shift;
@@ -15,16 +15,13 @@ sub html_text_diff {
     my %p     = @_;
 
     return diff(
-        _html_to_list( $html1, $p{ignore_comments} ),
-        _html_to_list( $html2, $p{ignore_comments} ),
+        diffable_html( $html1, %p ),
+        diffable_html( $html2, %p ),
         {
             CONTEXT => ( $p{context} || 2**31 ),
             STYLE => $p{style} || 'Table',
         },
     );
-}
-
-sub html_diff {
 }
 
 {
@@ -37,16 +34,14 @@ sub html_diff {
         PI => 'processing_instruction',
     );
 
-    sub _html_to_list {
-        my $html            = shift;
-        my $ignore_comments = shift;
+    sub diffable_html {
+        my $html = shift;
+        my %p    = @_;
 
-        my $accumulator = _HTMLAccumulator->new($ignore_comments);
+        my $accumulator = _HTMLAccumulator->new( $p{ignore_comments} );
 
         my $parser = HTML::TokeParser->new( ref $html ? $html : \$html );
         while ( my $token = $parser->get_token() ) {
-            next if $ignore_comments && $token->[0] eq 'C';
-
             my $type   = shift @{$token};
             my $method = $dispatch{$type}
                 or die "Unknown token type: $type";
