@@ -10,7 +10,7 @@ my $data = do {
     <DATA>;
 };
 
-for my $test ( split /^={25}$/ms, $data ) {
+for my $test ( split /^\|{25}$/ms, $data ) {
     my ( $desc, $html, $expect, $ignore_comments )
         = map { split /^-{25}$/m, $_ } $test;
     s/^\n+|\n+$//g for $desc, $expect;
@@ -53,7 +53,7 @@ Paragraph
 </p>
 </body>
 </html>
-=========================
+|||||||||||||||||||||||||
 attribute with entity in value
 -------------------------
 <p class="foo&quot;bar">Paragraph</p>
@@ -61,7 +61,7 @@ attribute with entity in value
 <p class="foo&quot;bar">
 Paragraph
 </p>
-=========================
+|||||||||||||||||||||||||
 including comments
 -------------------------
 <!--comment-->
@@ -71,7 +71,7 @@ including comments
 <p>
 Foo
 </p>
-=========================
+|||||||||||||||||||||||||
 ignoring comments
 -------------------------
 <!--comment-->
@@ -82,7 +82,7 @@ Foo
 </p>
 -------------------------
 1
-=========================
+|||||||||||||||||||||||||
 whitespace in <pre> tag
 -------------------------
 <p>
@@ -109,7 +109,7 @@ Foo
 <p>
 Bar
 </p>
-=========================
+|||||||||||||||||||||||||
 whitespace-only text
 -------------------------
 <p>
@@ -118,7 +118,7 @@ whitespace-only text
 -------------------------
 <p>
 </p>
-=========================
+|||||||||||||||||||||||||
 Missing end tag
 -------------------------
 <p>This is <strong>strong</p>
