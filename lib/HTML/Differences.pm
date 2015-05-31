@@ -18,8 +18,7 @@ sub html_text_diff {
 
     return diff(
         diffable_html( $html1, %p ),
-        diffable_html( $html2, %p ),
-        {
+        diffable_html( $html2, %p ), {
             CONTEXT => ( $p{context} || 2**31 ),
             STYLE => $p{style} || 'Table',
         },
@@ -55,8 +54,10 @@ sub html_text_diff {
     }
 }
 
+## no critic (Modules::ProhibitMultiplePackages)
 package    # hide from PAUSE
     _HTMLAccumulator;
+## use critic
 
 use HTML::Entities qw( encode_entities );
 
@@ -97,10 +98,7 @@ sub start_tag {
         my @attrs;
         for my $key ( sort keys %{$attr} ) {
             push @attrs,
-                  $key . '='
-                . q{"}
-                . encode_entities( $attr->{$key} )
-                . q{"};
+                $key . '=' . q{"} . encode_entities( $attr->{$key} ) . q{"};
         }
         $text .= q{ } . join q{ }, @attrs;
     }

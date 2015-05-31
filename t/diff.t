@@ -6,7 +6,7 @@ use Test::More;
 use HTML::Differences qw( diffable_html );
 
 my $data = do {
-    local $/;
+    local $/ = undef;
     <DATA>;
 };
 
@@ -15,12 +15,13 @@ for my $test ( split /^\|{25}$/ms, $data ) {
         = map { split /^-{25}$/m, $_ } $test;
     s/^\n+|\n+$//g for $desc, $expect;
 
+    ## no critic (BuiltinFunctions::ProhibitComplexMappings, ControlStructures::ProhibitMutatingListFunctions)
     is_deeply(
         diffable_html(
             $html,
             ignore_comments => $ignore_comments,
         ),
-        [ map { s/\\n/\n/g; $_ } grep { length } split /\n/, $expect ],
+        [ map { s/\\n/\n/g; $_ } grep {length} split /\n/, $expect ],
         $desc
     );
 }
