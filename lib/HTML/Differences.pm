@@ -146,7 +146,7 @@ sub processing_instruction {
 
 1;
 
-# ABSTRACT: Reasonable sane HTML diffing
+# ABSTRACT: Reasonably sane HTML diffing
 
 __END__
 
@@ -166,7 +166,7 @@ __END__
 
 =head1 DESCRIPTION
 
-This module provides a reasonable sane way to get the diff between two HTML
+This module provides a reasonably sane way to get the diff between two HTML
 documents or fragments. Under the hood, it uses L<HTML::Parser>.
 
 =head2 How the Diffing Works
