@@ -3,6 +3,8 @@ package HTML::Differences;
 use strict;
 use warnings;
 
+our $VERSION = '0.02';
+
 use Exporter qw( import );
 use HTML::TokeParser;
 use Text::Diff qw( diff );
