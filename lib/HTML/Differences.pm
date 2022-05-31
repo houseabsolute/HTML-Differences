@@ -225,7 +225,7 @@ include all the context. You can set this to some smaller value if you prefer.
 
 =back
 
-=head2 diffable_html( $html1, $html2, %options )
+=head2 diffable_html( $html1, %options )
 
 This returns an array reference of strings suitable for passing to any of
 L<Algorithm::Diff>'s methods or exported subroutines.
