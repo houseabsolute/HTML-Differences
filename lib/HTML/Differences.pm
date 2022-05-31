@@ -20,7 +20,7 @@ sub html_text_diff {
         diffable_html( $html1, %p ),
         diffable_html( $html2, %p ), {
             CONTEXT => ( $p{context} || 2**31 ),
-            STYLE => $p{style} || 'Table',
+            STYLE   => $p{style} || 'Table',
         },
     );
 }
@@ -124,8 +124,8 @@ sub text {
 
     unless ( $self->{in_pre} ) {
         return unless $text =~ /\S/;
-        $text =~ s/^\s+|\s+$//g;
-        $text =~ s/\s+/ /s;
+        $text               =~ s/^\s+|\s+$//g;
+        $text               =~ s/\s+/ /s;
     }
 
     push @{ $self->{html} }, $text;
